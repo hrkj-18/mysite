@@ -1,0 +1,49 @@
+{% extends 'main/header.html' %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col s12 m3 l3">
+            <ul class="collapsible popout">
+                {% for tutorial in sidebar %}
+                    {% if forloop.counter0 == this_tut_idx %}
+                        <li class="active">
+                            <div class="collapsible-header">{{tutorial.tutorial_title}}<br>(currently viewing)</div>
+                        </li>
+                    {% else %}
+                        <li>
+                            <div class="collapsible-header">{{tutorial.tutorial_title}}</div>
+                            <div class="collapsible-body">
+                                <p><a href="/{{tutorial.tutorial_slug}}"><button class="btn waves-effect waves-light right-align" style="background-color:yellow; color:black">Go</button></a></p>
+
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        
+        <div class="col s12, m6, l6" id="tutorial_id">
+            <h1>{{tutorial.tutorial_title}}</h1>
+            <p style="font-size:70%">Published {{tutorial.tutorial_published}}</p>
+            <div id="tutorial_content_id">
+                {{tutorial.tutorial_content|safe}}        
+            </div>
+        </div>
+
+        <div class="toc_parent"></div>
+        <!-- <div class="col s12, m3, l3" id="tutorial_toc">
+            <nav role="navigation" class="table-of-contents">
+                <h3>On this page:</h3>
+                <ul>
+                  <li><a href="#question-one">Question One</a></li>
+                </ul>
+              </nav>              
+        </div> -->
+
+
+    </div>
+    {% include "main/includes/toc.html" %}
+{% endblock %}
